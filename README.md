@@ -1,14 +1,15 @@
-# Applied-Cryptography-Project
+# Applied Cryptography Project
 Crash-Safe Key Erasure for Forward-Secure Encryption on Commodity Microcontrollers
-Project currently in progress
-GitHub repo made with Claude
+
+Applied cryptography course project, LUMS (in progress).
+
 Forward-secure encryption protects past messages only if a replaced key is really gone.
 On microcontroller flash it usually is not. This project:
 
 1. **measures the problem** (backbone): how much forward-secure key state survives in
    common microcontroller storage libraries;
-2. **tests what already exists** (baseline): the zeroing fixes in ESP-IDF NVS and
-   Trezor's storage, under random power cuts;
+2. **tests what already exists** (baseline): the zeroing fixes in ESP-IDF NVS (purge mode,
+   `nvs_purge_all()`), Trezor's storage and boot-time zeroing, under random power cuts;
 3. **builds the fix** (main contribution): DNEFS-style secure deletion brought to
    microcontrollers, a crash-safe key store on raw NOR flash.
 
@@ -41,10 +42,10 @@ k_0 is never reclaimed. With a hash ratchet, an attacker can therefore recompute
 ## 2. How we tested it, and the state of the art
 
 - **Harness:** probe firmware per storage library; `tools/stale_keys.py`; power-cut rig.
-- **Library matrix:** ESP-IDF NVS (default, purge), LittleFS, STM32 EEPROM emulation,
+- **Library matrix:** ESP-IDF NVS (default, purge, `nvs_purge_all()`), LittleFS, STM32 EEPROM emulation,
   Zephyr ITS on ZMS, Trezor NORCOW; optionally Nordic FDS and Silicon Labs NVM3.
-- **Existing fixes** (the baselines): ESP-IDF purge mode and Trezor's zeroing. Neither
-  documents crash behaviour during deletion.
+- **Existing fixes** (the baselines): ESP-IDF purge mode, `nvs_purge_all()`, Trezor's
+  zeroing and boot-time zeroing. None documents crash behaviour during deletion.
 - **Closest related work:** DNEFS/UBIFSec (Linux, NAND).
 
 → [docs/2-testing-and-sota.md](docs/2-testing-and-sota.md)
@@ -75,23 +76,32 @@ k_0 is never reclaimed. With a hash ratchet, an attacker can therefore recompute
 
 ```bash
 cd firmware/esp-idf
-idf.py --preview set-target linux && idf.py --preview build
-cd build && ./stale_key_probe.elf
-python3 ../../../tools/stale_keys.py scan nvs_dump.bin --seed lums-cs5803 --epochs 100
+idf.py --preview set-target linux && idf.py build
+./build/stale_key_probe.elf                       # writes nvs_dump.bin here
+python3 ../../tools/stale_keys.py scan nvs_dump.bin --seed lums-cs5803 --epochs 100
 ```
+
+No ESP-IDF at all? Check the scanner on the committed dumps:
+`python3 tools/stale_keys.py scan samples/nvs_default_100updates.bin --seed lums-cs5803 --epochs 100`.
 
 Full instructions: [docs/reproduce.md](docs/reproduce.md).
 
 ## Layout
 
 ```
-docs/                 the three sections, reproduction guide, search log, references.bib, revised-scope.md
-firmware/common/      ratchet + SHA-256, shared by every port
-firmware/esp-idf/     probe for ESP-IDF NVS (also builds for the linux host target)
-firmware/<library>/   probe ports: zephyr-zms, stm32-eeprom, trezor-norcow, littlefs (TODO)
-firmware/keystore/    C3 key store (design.md for now)
-tools/stale_keys.py   scanner; storage-agnostic, unchanged across ports
-rig/                  power-cut rig
-results/<library>-<setup>/
-samples/
+docs/                       1-problem, 2-testing-and-sota, 3-contribution, reproduce,
+                            related-work-search, references.bib
+firmware/common/            ratchet + SHA-256, shared by every port
+firmware/esp-idf/           ESP-IDF project: probe in main/, sdkconfig overlays per mode
+                            (also builds for the linux host target)
+firmware/<library>/         probe ports: zephyr-zms, stm32-eeprom, trezor-norcow, littlefs (TODO)
+firmware/keystore/          C3 key store (design.md for now)
+tools/stale_keys.py         scanner; storage-agnostic, unchanged across ports
+rig/                        power-cut rig
+results/<library>-<setup>/  summary CSV, meta.json, runs/<mode>-<N>/
+samples/                    100-update dumps (default, purge) and a serial log
 ```
+
+## Acknowledgements
+
+This repository was prepared with help from Claude (Anthropic).

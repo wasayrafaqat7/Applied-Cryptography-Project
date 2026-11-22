@@ -1,0 +1,130 @@
+% references.bib
+% Status markers: entries above the "not re-checked" line were checked on
+% 21-22 Nov 2026. A "TODO" comment marks a field that is still unconfirmed.
+
+% ---------------------------------------------------------------------------
+% Cryptography that assumes erasure
+% ---------------------------------------------------------------------------
+@inproceedings{BY03, author={Mihir Bellare and Bennet Yee},
+  title={Forward-Security in Private-Key Cryptography},
+  booktitle={Topics in Cryptology -- CT-RSA 2003}, series={LNCS}, volume={2612},
+  year={2003}}  % TODO: pages not checked
+
+@inproceedings{GM15, author={Matthew D. Green and Ian Miers},
+  title={Forward Secure Asynchronous Messaging from Puncturable Encryption},
+  booktitle={IEEE Symposium on Security and Privacy (S\&P)}, pages={305--320}, year={2015}}
+
+@inproceedings{DJSS18, author={David Derler and Tibor Jager and Daniel Slamanig and Christoph Striecks},
+  title={Bloom Filter Encryption and Applications to Efficient Forward-Secret 0-{RTT} Key Exchange},
+  booktitle={Advances in Cryptology -- EUROCRYPT 2018}, series={LNCS}, volume={10822},
+  year={2018}}  % TODO: pages not checked
+
+@inproceedings{BDK+21, author={Colin Boyd and Gareth T. Davies and Bor de Kock and Kai Gellert and Tibor Jager and Lise Millerjord},
+  title={Symmetric Key Exchange with Full Forward Security and Robust Synchronization},
+  booktitle={Advances in Cryptology -- ASIACRYPT 2021}, series={LNCS}, volume={13093},
+  pages={681--710}, year={2021}, doi={10.1007/978-3-030-92068-5_23}}
+
+@inproceedings{BGP22, author={Matilda Backendal and Felix G{\"u}nther and Kenneth G. Paterson},
+  title={Puncturable Key Wrapping and Its Applications},
+  booktitle={Advances in Cryptology -- ASIACRYPT 2022}, series={LNCS}, volume={13792},
+  pages={651--681}, year={2022}}
+
+@article{EPCS26, author={Yang Yang and others},
+  title={{EPCS}},  % TODO: full title and author list
+  journal={IEEE Transactions on Information Forensics and Security}, year={2026}}
+
+@misc{Chronos25, author={Roozbeh Sarenche and Sayon Duttagupta and Kevin Bogner and Varesh Mishra and Francesco Milizia and Bart Preneel},
+  title={Ghost of Sessions Past: Distributed and Forward Secure Key Establishment for Implantable Medical Devices},
+  howpublished={Cryptology ePrint Archive, Paper 2025/2322}, year={2025},
+  url={https://eprint.iacr.org/2025/2322}}
+
+% ---------------------------------------------------------------------------
+% Secure deletion
+% ---------------------------------------------------------------------------
+@inproceedings{RCB12, author={Joel Reardon and Srdjan Capkun and David Basin},
+  title={Data Node Encrypted File System: Efficient Secure Deletion for Flash Memory},
+  booktitle={21st USENIX Security Symposium}, pages={333--348}, year={2012}}
+
+@inproceedings{RMCB12, author={Joel Reardon and Claudio Marforio and Srdjan Capkun and David Basin},
+  title={User-Level Secure Deletion on Log-Structured File Systems},
+  booktitle={ACM Asia Conference on Computer and Communications Security (ASIACCS)}, year={2012}}
+
+@inproceedings{RBC13, author={Joel Reardon and David Basin and Srdjan Capkun},
+  title={{SoK}: Secure Data Deletion},
+  booktitle={IEEE Symposium on Security and Privacy (S\&P)}, year={2013}}
+
+@inproceedings{RRBC13, author={Joel Reardon and Hubert Ritzdorf and David Basin and Srdjan Capkun},
+  title={Secure Data Deletion from Persistent Media},
+  booktitle={ACM Conference on Computer and Communications Security (CCS)}, pages={271--284}, year={2013}}
+
+@inproceedings{RGW+24, author={Zachary Ratliff and Wittmann Goh and Abe Wieland and James Mickens and Ryan Williams},
+  title={Holepunch: Fast, Secure File Deletion with Crash Consistency},
+  booktitle={IEEE Symposium on Security and Privacy (S\&P)}, year={2024},
+  note={Cryptology ePrint Archive, Paper 2023/1927}}
+
+@inproceedings{WGSS11, author={Michael Wei and Laura M. Grupp and Frederick E. Spada and Steven Swanson},
+  title={Reliably Erasing Data from Flash-Based Solid State Drives},
+  booktitle={USENIX Conference on File and Storage Technologies (FAST)}, pages={105--117}, year={2011}}
+
+@misc{AppleSec, author={{Apple Inc.}}, title={Apple Platform Security (Effaceable Storage)},
+  url={https://support.apple.com/guide/security/welcome/web}}
+
+@misc{TrezorStorage, author={{SatoshiLabs}}, title={Trezor Storage (norcow) design},
+  url={https://docs.trezor.io/trezor-firmware/storage/index.html}}
+
+% ---------------------------------------------------------------------------
+% Analog remanence
+% ---------------------------------------------------------------------------
+@inproceedings{Sko05, author={Sergei Skorobogatov},
+  title={Data Remanence in Flash Memory Devices},
+  booktitle={Cryptographic Hardware and Embedded Systems (CHES 2005)}, series={LNCS}, volume={3659},
+  pages={339--353}, year={2005}}
+
+@inproceedings{HR20, author={Md Mehedi Hasan and Biswajit Ray},
+  title={Data Recovery from ``Scrubbed'' {NAND} Flash Storage: Need for Analog Sanitization},
+  booktitle={29th USENIX Security Symposium}, year={2020}}
+
+@inproceedings{Mur26, author={Anjali Murali and Matchima Buddhanoy and Mondol Anik Kumar and Aleksandar Milenkovic and Indrajit Ray and Sudeep Pasricha and Biswajit Ray},
+  title={Erasing Is Not Enough: Data Leakage From Sanitized Charge-Trap {NOR} Flash Devices},
+  booktitle={IEEE International Symposium on Hardware Oriented Security and Trust (HOST)},
+  pages={1--11}, year={2026}, doi={10.1109/HOST68814.2026.11604779}}
+
+% ---------------------------------------------------------------------------
+% Attacks on MCU key storage; ESP-IDF documentation
+% ---------------------------------------------------------------------------
+@article{SWO+24, author={Marc Schink and Alexander Wagner and Felix Oberhansl and Stefan K{\"o}ckeis and Emanuele Strieder and Sven Freud and Dominik Klein},
+  title={Unlock the Door to my Secrets, but don't Forget to Glitch: A comprehensive analysis of flash erase suppression attacks},
+  journal={IACR TCHES}, volume={2024}, number={2}, pages={88--129}, year={2024},
+  doi={10.46586/tches.v2024.i2.88-129}}
+
+@inproceedings{KSDS19, author={Archanaa S. Krishnan and Charles Suslowicz and Daniel Dinu and Patrick Schaumont},
+  title={Secure Intermittent Computing Protocol: Protecting State Across Power Loss},
+  booktitle={DATE 2019}, pages={734--739}, year={2019}, doi={10.23919/DATE.2019.8714997}}
+
+@misc{CVE-2019-17391, author={{Espressif Systems}},
+  title={{CVE-2019-17391}: {ESP32} fault injection and {eFuse} protections},
+  url={https://nvd.nist.gov/vuln/detail/CVE-2019-17391}, year={2019}}
+
+@misc{AHT23, author={Karim M. Abdellatif and Olivier H{\'e}riveaux and Adrian Thillard},
+  title={Unlimited Results: Breaking Firmware Encryption of {ESP32-V3}},
+  howpublished={Cryptology ePrint Archive, Paper 2023/090}, year={2023},
+  url={https://eprint.iacr.org/2023/090}}
+
+@misc{ESP-NVS, author={{Espressif Systems}}, title={{ESP-IDF} Programming Guide: Non-Volatile Storage Library},
+  url={https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/nvs_flash.html},
+  note={Purge mode documented from release-v6.0; tested with v6.1}}
+
+% TODO: NCC Group ESP32 guidance (checked 22 Nov, not yet cited): add title and URL when cited.
+
+% ---------------------------------------------------------------------------
+% From the 21 Nov literature review; not re-checked:
+@inproceedings{KS18, author={Archanaa S. Krishnan and Patrick Schaumont},
+  title={Exploiting Security Vulnerabilities in Intermittent Computing}, booktitle={SPACE 2018}, year={2018}}
+@inproceedings{ZTQL13, author={Mai Zheng and Joseph Tucek and Feng Qin and Mark Lillibridge},
+  title={Understanding the Robustness of {SSDs} under Power Fault}, booktitle={USENIX FAST}, year={2013}}
+@inproceedings{Graphene25, title={Graphene}, booktitle={MILCOM 2025}, year={2025}}  % TODO: full entry
+@misc{Diamond26, title={Diamond}, year={2026}}                                   % TODO: full entry
+@misc{KUDOS, title={Key Update for OSCORE (KUDOS)}, howpublished={IETF draft-15}} % TODO: exact draft name
+@misc{cairn28, title={cairn-esp32-device-firmware, PR \#28}, year={2026}}          % TODO: URL
+@misc{intWave26, title={intWave blog: LittleFS deleted data}, year={2026}}         % TODO: URL
+@misc{CVE-2026-15890, title={Zephyr ITS superseded entries}, year={2026}}           % TODO: check

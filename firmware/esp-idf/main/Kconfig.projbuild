@@ -1,0 +1,64 @@
+menu "Stale key probe"
+
+    choice PROBE_RUN_MODE
+        prompt "Run mode"
+        default PROBE_MODE_BATCH
+        help
+            Batch: erase NVS, do a fixed number of key updates, then stop so you
+            can dump the flash. Continuous: keep updating forever and resume
+            after every reset; this is the mode for power-cut tests. Continuous
+            mode never erases or reformats NVS: on an init or load error it
+            prints "PROBE FAIL ..." and halts so the rig can dump the flash.
+
+        config PROBE_MODE_BATCH
+            bool "Batch: N updates, then stop"
+        config PROBE_MODE_CONTINUOUS
+            bool "Continuous: update forever (for power-cut tests)"
+    endchoice
+
+    config PROBE_NUM_UPDATES
+        int "Number of key updates in batch mode"
+        depends on PROBE_MODE_BATCH
+        range 1 100000
+        default 100
+
+    config PROBE_UPDATE_DELAY_MS
+        int "Delay between updates (ms)"
+        range 0 60000
+        default 0 if PROBE_MODE_BATCH
+        default 20 if PROBE_MODE_CONTINUOUS
+
+    config PROBE_SEED
+        string "Ratchet seed (must match --seed in tools/stale_keys.py)"
+        default "lums-cs5803"
+
+    config PROBE_NVS_PURGE
+        bool "Open NVS in purge mode (NVS_READWRITE_PURGE, tested on ESP-IDF v6.1)"
+        default n
+        help
+            Uses Espressif's purge mode, which writes zeros over every value it
+            replaces or deletes. Documented from the ESP-IDF release-v6.0 docs;
+            this probe is tested on v6.1 and refuses to build below v6.1.0.
+            Opening in purge mode does not purge entries erased earlier; use
+            PROBE_PURGE_ALL_AT_END for that. Leave off to measure default NVS.
+
+    config PROBE_PURGE_ALL_AT_END
+        bool "Call nvs_purge_all() once after the batch (tested on ESP-IDF v6.1)"
+        depends on PROBE_MODE_BATCH
+        default n
+        help
+            Runs the batch in whatever mode is selected above, then calls the
+            one-shot nvs_purge_all(). Useful to compare per-update purging with
+            a single clean-up at the end.
+
+    config PROBE_ERASE_AT_START
+        bool "Erase the NVS partition before the batch"
+        depends on PROBE_MODE_BATCH
+        default y
+
+    config PROBE_LINUX_DUMP_PATH
+        string "Linux target only: file to write the NVS partition to"
+        depends on IDF_TARGET_LINUX
+        default "nvs_dump.bin"
+
+endmenu

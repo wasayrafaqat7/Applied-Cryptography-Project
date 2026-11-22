@@ -1,5 +1,0 @@
-# Default single-app partition table: the NVS partition is at 0x9000, 24 KB (6 pages).
-CONFIG_PARTITION_TABLE_SINGLE_APP=y
-
-# Flash encryption and secure boot stay OFF (their defaults). Do not enable them
-# on test boards: we need readable dumps, and enabling them burns eFuses for good.

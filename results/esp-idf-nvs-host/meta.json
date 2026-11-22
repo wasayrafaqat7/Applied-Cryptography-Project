@@ -1,0 +1,16 @@
+{
+  "library": "esp-idf-nvs",
+  "idf_commit": null,
+  "idf_version": "v6.1",
+  "target": "linux",
+  "board": null,
+  "chip_rev": null,
+  "flash_part": "file-emulated NOR (host)",
+  "nvs_partition": "0x9000, 0x6000 (6 pages)",
+  "sdkconfig_overlays": {"default": ["sdkconfig.defaults"], "purge": ["sdkconfig.defaults", "sdkconfig.purge"]},
+  "seed": "lums-cs5803",
+  "updates": [25, 50, 100, 150, 155, 160, 200, 300, 500, 1000, 2000, 5000],
+  "wifi": false,
+  "date": null,
+  "note": "Summary of the first host-emulation sweep. idf_commit and date were not recorded; fill them in if known, and keep per-run folders under runs/ from now on (see docs/reproduce.md)."
+}
